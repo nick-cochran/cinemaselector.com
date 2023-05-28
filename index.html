@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/22c303148f.js" crossorigin="anonymous"></script>
+    <title>Cinema Selector</title>
+</head>
+<body>
+
+<div class="pageContents">
+    <div class="header">
+        <img class="popcornImg" src="images/popcorn.png" alt="Popcorn Picture">
+        <h1 class="title"> Cinema Selector </h1>
+        <img class="popcornImg" src="images/popcorn.png" alt="Popcorn Picture">
+    </div>
+    
+    <div class="pageBody">
+        <div class="filtersPage">
+
+            <div class="filters-div">
+
+                <div class="filters">
+
+                    <div class="filter numFilms">
+                        <p class="numFilmsName"> How many films to choose from? </p>
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="numFilmsInfo">
+                                <p> 
+                                    The program randomly selects from a collection of films 
+                                        sorted by popularity. Select the number of films that 
+                                        will be randomly chosen from. If no number is selected,
+                                        the most popular film will be chosen. Click on the dot before
+                                        each selection to start recording (filter by that category).
+                                        For more information about something, click on the info button.
+                                </p>
+                            </div>
+                        </div>
+                        <input type="number" class="numFilmsText" id="numFilmsInput" min="1">
+                    </div>
+
+                    <div class="filter genre">
+                        <input type="checkbox" class="filterCheckbox" id="genreCheckbox">
+                        <label for="genreCheckbox" class="filterCustomCheckbox"> </label>
+                        <label for="genreCheckbox" class="filterName"> Filter by Genre: </label>
+                        <select class="filterDropdown" id="genreDropdown">
+                            <option value="28">Action</option>
+                            <option value="12">Adventure</option>
+                            <option value="16">Animation</option>
+                            <option value="35">Comedy</option>
+                            <option value="80">Crime</option>
+                            <option value="99">Documentary</option>
+                            <option value="18">Drama</option>
+                            <option value="10751">Family</option>
+                            <option value="14">Fantasy</option>
+                            <option value="36">History</option>
+                            <option value="27">Horror</option>
+                            <option value="10402">Music</option>
+                            <option value="9648">Mystery</option>
+                            <option value="10749">Romance</option>
+                            <option value="878">Science Fiction</option>
+                            <option value="10770">TV Movie</option>
+                            <option value="53">Thriller</option>
+                            <option value="10752">War</option>
+                            <option value="37">Western</option>
+                        </select>
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="genreInfo">
+                                <p> Here you can select one genre to sort by. </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter year">
+                        <input type="checkbox" class="filterCheckbox" id="yearCheckbox">
+                        <label for="yearCheckbox" class="filterCustomCheckbox"> </label>
+                        <label for="yearCheckbox" class="filterName"> Filter by Release Year: </label>
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="yearInfo">
+                                <p>
+                                    Here you can set the range of years that will be selected from.
+                                        If you just want to select from one year, set both handles
+                                        to the same year.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="filterSlider" id="yearSlider">
+                            <div class="customSliderHandle ui-slider-handle" id="yearMinHandle"></div>
+                            <div class="customSliderHandle ui-slider-handle" id="yearMaxHandle"></div>
+                        </div>
+                    </div>
+
+                    <div class="filter runtime">
+                        <input type="checkbox" class="filterCheckbox" id="runtimeCheckbox">
+                        <label for="runtimeCheckbox" class="filterCustomCheckbox"> </label>
+                        <label for="runtimeCheckbox" class="filterName"> Filter by Runtime: </label>
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="runtimeInfo">
+                                <p>
+                                    Here you can set the range for how long/short the film is.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="filterSlider" id="runtimeSlider">
+                            <div class="customSliderHandle ui-slider-handle" id="runtimeMinHandle"></div>
+                            <div class="customSliderHandle ui-slider-handle" id="runtimeMaxHandle"></div>
+                        </div>
+                    </div>
+
+                    <div class="filter cast">
+                        <input type="checkbox" class="filterCheckbox" id="castCheckbox">
+                        <label for="castCheckbox" class="filterCustomCheckbox"> </label>
+                        <label for="castCheckbox" class="filterName"> Filter by Cast: </label>
+                        <input type="text" class="filterText" id="castInput">
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="castInfo">
+                                <p>
+                                    Type in an actor's name to the best of your abilities and
+                                        the program will try to find the actor you are looking for
+                                        and then show you only films that they are in.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter crew">
+                        <input type="checkbox" class="filterCheckbox" id="crewCheckbox">
+                        <label for="crewCheckbox" class="filterCustomCheckbox"> </label>
+                        <label for="crewCheckbox" class="filterName"> Filter by Crew: </label>
+                        <input type="text" class="filterText" id="crewInput">
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="crewInfo">
+                                <p>
+                                    Type in a crew member's name to the best of your abilities and
+                                        the program will try to find the crew member you are looking for
+                                        and then show you only films that they worked on. This includes
+                                        directors, writers, producers, etc.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter providers">
+                        <input type="checkbox" class="filterCheckbox" id="providersCheckbox">
+                        <label for="providersCheckbox" class="filterCustomCheckbox"> </label>
+                        <label for="providersCheckbox" class="filterName" > Filter by Streaming Services: </label>
+                        <select class="filterDropdown" id="providersDropdown">
+                            <option value="8">Netflix</option>
+                            <option value="9">Amazon Prime Video</option>
+                            <option value="337">Disney+</option>
+                            <option value="384">HBO Max</option>
+                            <option value="15">Hulu</option>
+                            <option value="2">Apple TV+</option>
+                            <option value="350">Peacock</option>
+                            <option value="387">Paramount+</option>
+                            <option value="34">Showtime</option>
+                        </select>
+                        <div class="info">
+                            <i class="fas fa-info-circle infoBtn"></i>
+                            <div class="infoText" id="providersInfo">
+                                <p>
+                                    Here you can select one streaming service to sort by.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="generateMovie">
+                    <button class="generateMovieBtn" id="discoverBtn">Find a Movie</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="movie-div">
+            <div class="movie">
+                <p id="movieTitle"> ??? </p>
+                <img id="moviePoster" src="images/" alt="Unknown movie poster">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
