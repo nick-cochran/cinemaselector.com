@@ -4,6 +4,7 @@ let url = "https://api.themoviedb.org/3/";
 $( function() {
     $( "#discoverBtn" ).on("click", function() {
         discoverFilm();
+        $( ".redBackground" ).show();
     });
 
     $( ".infoBtn" ).on("click", function() {
@@ -46,73 +47,17 @@ $( function() {
 });
 
 async function parsePeople(person) {
-    // let peopleArray = people.split(",");
-    // peopleArray = peopleArray.filter(function (str) {
-    //     return str != "";
-    // });
 
-    // let request = new XMLHttpRequest();
-    // request.onreadystatechange = function() {
-    //     if (this.readyState === 4 && this.status === 200) {
-    //         const response = JSON.parse(this.responseText);
-    //         console.log(response);
-    //         let id = response.results[0].id;
-    //         return id + ",";
-    //     }
-    // }
     let requestURL = url + "search/person?api_key=" + API_KEY + "&query=" + person;
-    // request.open("GET", requestURL, true);
-    // request.setRequestHeader("Content-Type", "application/json");
-    // request.send();
 
     const result = fetch(requestURL)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             let id = data.results[0].id;
             return id + ",";
         });
     return result;
 
-
-    // peopleIds = peopleIds.substring(0, peopleIds.length - 1);
-    // peopleIds = "&with_people=" + peopleIds;
-    // console.log(peopleIds);
-    // return peopleIds; // figure out how to get this to return after the request is done
-
-
-
-    // const fetchData = () => {
-    //     return Promise.all([
-    //         fetch('api-url-1'),
-    //         fetch('api-url-2'),
-    //         fetch('api-url-3')
-    //     ])
-    //         .then(responses => Promise.all(responses.map(response => response.json())))
-    //         .then(data => {
-    //             const data1 = data[0];
-    //             const data2 = data[1];
-    //             const data3 = data[2];
-
-    //             // Use data1, data2, and data3 to make final API call
-    //             return fetch('final-api-url', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json'
-    //                 },
-    //                 body: JSON.stringify({
-    //                     data1,
-    //                     data2,
-    //                     data3
-    //                 })
-    //             });
-    //         })
-    //         .then(response => response.json());
-    // };
-
-    // fetchData().then(data => {
-    //     // Do something with the final data
-    // });
 }
 
 function getPersonId(person) {
@@ -121,7 +66,6 @@ function getPersonId(person) {
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.responseText);
-            console.log(response);
             let id = response.results[0].id;
             return id + ",";
         }
@@ -139,9 +83,7 @@ async function discoverFilm() {
     if($("#numFilmsInput").val() !== "") {
         numFilms = $("#numFilmsInput").val();
     }
-    console.log(numFilms);
     let randomPage = Math.floor((Math.random() * (numFilms / 20)) + 1);
-    console.log(randomPage);
 
     let content = "&language=en-US&include_adult=false&include_video=false";
     let page = "&page=" + randomPage;
@@ -186,20 +128,12 @@ async function discoverFilm() {
             await parsePeople($("#castInput").val()).then(function(result) {
                 people += result;
             });
-            // people += parsePeople($("#castInput").val());
         }
         if($("#crewInput") != "" && $("#crewCheckbox").prop("checked")) {
             await parsePeople($("#crewInput").val()).then(function(result) {
                 people += result;
             });
         }
-        // if($("#castInput") != "" && $("#crewInput") != "") {
-        //     people += parsePeople($("#castInput").val()) + parsePeople($("#crewInput").val());
-        // } else if($("#castInput") != "") {
-        //     people += parsePeople($("#castInput").val());
-        // } else if($("#crewInput") != "") {
-        //     people += parsePeople($("#castInput").val());
-        // }
         people = people.substring(0, people.length - 1);
         people = "&with_people=" + people;
     }
@@ -215,7 +149,6 @@ async function discoverFilm() {
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.responseText);
-            console.log(response);
             parseResult(response, numFilms);
         }
     }
@@ -223,7 +156,6 @@ async function discoverFilm() {
     let requestURL = url + "discover/movie?api_key=" + API_KEY + content;
     request.open("GET", requestURL, true);
     request.setRequestHeader("Content-type", "application/json");
-    // request.setRequestHeader("Authorization", "Bearer " + API_KEY);
     request.send();
 }
 
